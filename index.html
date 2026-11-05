@@ -1,0 +1,169 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Upwork Reply Outcomes</title><meta name="description" content="What happens to our Upwork replies: totals for the team."><style>
+:root{color-scheme:light;--bg:#f6f5f3;--card:#ffffff;--ink:#141310;--muted:#6e6e73;--brand:#2a78d6;--good:#2f7d4e;--bad:#c8372d;--line:#e4e2df;
+--plain:#b9c8da;--soft:color-mix(in srgb,var(--ink) 62%,var(--muted))}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;overflow:hidden}
+h1,h2,.lead,.cap{text-wrap:balance}
+.stage{position:absolute;left:50%;top:50%;width:1280px;height:720px;transform-origin:center}
+section{position:absolute;inset:0;padding:56px 100px 84px;display:flex;flex-direction:column;justify-content:center;gap:24px;opacity:0;pointer-events:none;transition:opacity .5s}
+section.active{opacity:1;pointer-events:auto}
+.kicker{font-size:16.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--brand)}
+h1{font-size:62px;line-height:1.06;font-weight:800;letter-spacing:-.02em;max-width:980px}
+h2{font-size:44px;line-height:1.1;font-weight:800;letter-spacing:-.02em;max-width:1080px}
+.lead{font-size:24px;line-height:1.45;color:var(--soft);max-width:1000px}
+.cap{font-size:18px;color:var(--muted)}
+.title{justify-content:center;gap:24px}
+.anim{opacity:0;transform:translateY(18px)}
+.active .anim{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:var(--d,0s)}
+@keyframes rise{to{opacity:1;transform:none}}
+
+/* 100 -> 27 -> 5 */
+.flow{display:flex;align-items:center;gap:34px;margin-top:18px}
+.flow .step{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px 40px;min-width:280px}
+.flow em{font-style:normal;font-size:124px;line-height:1;font-weight:800;letter-spacing:-.03em}
+.flow span{font-size:24px;color:var(--soft);margin-top:10px}
+.flow .arrow{font-size:44px;color:var(--muted)}
+.flow .win em{color:var(--brand)}
+
+/* horizontal bars: one hue, the bar the slide is about in brand blue, the rest quiet */
+.bars{display:flex;flex-direction:column;gap:22px;margin-top:8px}
+.row{display:grid;grid-template-columns:360px 1fr 230px;align-items:center;gap:22px}
+.row .lbl{font-size:25px}
+.row .track{height:24px;border-radius:4px;background:color-mix(in srgb,var(--line) 55%,var(--bg))}
+.row .track i{display:block;height:100%;width:var(--w);background:var(--plain);border-radius:4px;transform-origin:left;transform:scaleX(0)}
+.active .row .track i{animation:growx .9s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(.3s + var(--i)*90ms)}
+@keyframes growx{to{transform:scaleX(1)}}
+.row.hl .track i{background:var(--brand)}
+.row.hl .lbl,.row.hl .val{font-weight:700}
+.row .val{font-size:25px;text-align:right;font-variant-numeric:tabular-nums}
+.row .val small{font-size:19px;color:var(--muted);font-weight:500;margin-left:8px}
+
+/* two or three big numbers */
+.stats{display:flex;gap:22px;margin-top:6px}
+.stats div{flex:1;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px 28px;display:flex;flex-direction:column;gap:8px}
+.stats em{font-style:normal;font-size:84px;line-height:1;font-weight:800;letter-spacing:-.02em}
+.stats span{font-size:22px;line-height:1.35;color:var(--soft)}
+.stats .bad em{color:var(--bad)} .stats .brandtone em{color:var(--brand)}
+.split{display:grid;grid-template-columns:1fr 1.45fr;gap:44px;align-items:start}
+.split .stats{flex-direction:column}
+.split .row{grid-template-columns:280px 1fr 90px}
+.split .row .lbl,.split .row .val{font-size:21px}
+
+/* paid vs organic */
+table.vs{border-collapse:separate;border-spacing:0;width:100%;max-width:1080px;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;font-size:24px}
+table.vs th,table.vs td{padding:13px 30px;border-top:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums}
+table.vs th:first-child,table.vs td:first-child{text-align:left}
+table.vs thead th{border-top:0;font-size:17px;font-weight:600;color:var(--muted)}
+table.vs td:first-child{color:var(--soft)}
+table.vs td b{font-weight:700}
+
+/* numbered points */
+.points{list-style:none;padding:0;display:flex;flex-direction:column;gap:16px;margin-top:6px;max-width:1080px}
+.points li{display:flex;gap:22px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 30px}
+.points i{font-style:normal;flex:none;width:46px;height:46px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:700;font-size:19px}
+.points b{display:block;font-size:28px;margin-bottom:6px}
+.points span{font-size:21px;line-height:1.4;color:var(--soft)}
+
+/* navigation: dots at the bottom center (Will, 2026-08-27), a counter, a hint */
+.dots{position:fixed;left:50%;bottom:clamp(12px,2vh,22px);transform:translateX(-50%);display:flex;gap:10px;z-index:5}
+.dots button{width:11px;height:11px;border-radius:50%;border:0;padding:0;background:var(--line);cursor:pointer}
+.dots button.on{background:var(--brand);transform:scale(1.25)}
+.count{position:fixed;right:18px;bottom:12px;font-size:14px;color:var(--muted)}
+.hint{position:fixed;left:18px;bottom:12px;font-size:14px;color:var(--muted)}
+
+@media screen and (max-width:1087px),screen and (max-height:611px){
+  html,body{height:auto;overflow-x:hidden;overflow-y:visible}
+  .stage{position:static;width:auto;height:auto;transform:none!important}
+  section{position:relative;inset:auto;padding:44px 16px;gap:16px;opacity:1;pointer-events:auto;border-bottom:1px solid var(--line)}
+  section:last-child{border-bottom:0;padding-bottom:64px}
+  section.title{min-height:70vh}
+  .kicker{font-size:14px} h1{font-size:36px} h2{font-size:27px;line-height:1.18} .lead{font-size:17px} .cap{font-size:14px}
+  .flow{flex-direction:column;align-items:stretch;gap:8px}
+  .flow .step{min-width:0;padding:18px 20px} .flow em{font-size:56px} .flow span{font-size:17px}
+  .flow .arrow{transform:rotate(90deg);font-size:30px;align-self:center}
+  .row,.split .row{grid-template-columns:1fr 92px;gap:6px 12px}
+  .row .lbl,.split .row .lbl{grid-column:1 / -1;font-size:16px}
+  .row .val,.split .row .val{font-size:16px} .row .val small{font-size:13px}
+  .stats{flex-direction:column;gap:10px} .stats div{padding:16px 18px} .stats em{font-size:42px} .stats span{font-size:15px}
+  .split{grid-template-columns:1fr;gap:20px}
+  table.vs{font-size:15px} table.vs th,table.vs td{padding:8px 10px} table.vs thead th{font-size:13px}
+  .points li{padding:14px 16px;gap:14px} .points i{width:32px;height:32px;font-size:16px} .points b{font-size:18px} .points span{font-size:15px}
+  .dots,.hint,.count{display:none}
+}
+@media print{
+  @page{size:1280px 720px;margin:0}
+  html,body{height:auto;overflow:visible;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .stage{position:static;width:1280px;height:auto;transform:none!important}
+  section{position:relative;inset:auto;width:1280px;height:720px;opacity:1;overflow:hidden;background:var(--bg);break-after:page}
+  .dots,.hint,.count{display:none!important}
+}
+@media print,(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .anim{opacity:1;transform:none} .row .track i{transform:none}
+}
+</style></head><body><div class="stage"><section class="title"><div class="kicker anim">DWA · Upwork sales review</div>
+<h1 class="anim" style="--d:.1s">What happens to our Upwork replies</h1>
+<p class="lead anim" style="--d:.2s">7,775 leads who wrote to us on Upwork, Nov 2022 to Nov 5, 2026. Paid means our bids. Organic means their invites, messages and consultations.</p></section><section><div class="kicker anim">The big picture</div><h2 class="anim" style="--d:.05s">Out of every 100 replies</h2>
+<div class="flow anim" style="--d:.15s"><div class="step"><em>100</em><span>replies</span></div><div class="arrow">→</div>
+<div class="step"><em>27</em><span>book a call</span></div><div class="arrow">→</div>
+<div class="step win"><em>5</em><span>become clients</span></div></div>
+<p class="cap anim" style="--d:.3s">7,775 leads · 2,090 calls booked · 364 became clients (328 different clients)</p></section><section><div class="kicker anim">How they ended</div><h2 class="anim" style="--d:.05s">Half of our leads just go quiet</h2>
+<div class="bars"><div class="row hl" style="--w:100.0%;--i:0"><span class="lbl">They went quiet</span><span class="track"><i></i></span><span class="val">4,057<small>52%</small></span></div><div class="row" style="--w:42.6%;--i:1"><span class="lbl">We said &quot;not a fit&quot;</span><span class="track"><i></i></span><span class="val">1,729<small>22%</small></span></div><div class="row" style="--w:19.8%;--i:2"><span class="lbl">They said no</span><span class="track"><i></i></span><span class="val">805<small>10%</small></span></div><div class="row" style="--w:18.3%;--i:3"><span class="lbl">We never answered</span><span class="track"><i></i></span><span class="val">741<small>10%</small></span></div><div class="row" style="--w:9.0%;--i:4"><span class="lbl">Became a client</span><span class="track"><i></i></span><span class="val">364<small>5%</small></span></div><div class="row" style="--w:1.9%;--i:5"><span class="lbl">Still open or not clear</span><span class="track"><i></i></span><span class="val">79<small>1%</small></span></div></div><p class="cap anim" style="--d:.2s">All 7,775 leads. One outcome each. A lead who signed counts as a client.</p></section><section><div class="kicker anim">Paid vs organic</div><h2 class="anim" style="--d:.05s">Both channels look alike: most leads go quiet</h2><table class="vs anim" style="--d:.15s"><thead><tr><th></th><th>Paid (our bids)</th><th>Organic (they came to us)</th></tr></thead><tbody><tr><td>Leads</td><td><b>3,295</b></td><td><b>4,480</b></td></tr><tr><td>Booked a call</td><td><b>25.3%</b></td><td><b>28.1%</b></td></tr><tr><td>Became a client</td><td><b>4.0%</b></td><td><b>5.2%</b></td></tr><tr><td>Went quiet</td><td><b>54.0%</b></td><td><b>50.8%</b></td></tr><tr><td>They said no</td><td><b>14.4%</b></td><td><b>7.4%</b></td></tr><tr><td>We said &quot;not a fit&quot;</td><td><b>14.2%</b></td><td><b>28.2%</b></td></tr><tr><td>We never answered</td><td><b>12.2%</b></td><td><b>7.6%</b></td></tr></tbody></table><p class="cap anim" style="--d:.25s">Organic leads include job invites that we turn down, so "not a fit" is higher there.</p></section><section><div class="kicker anim">Going quiet</div><h2 class="anim" style="--d:.05s">Most quiet leads never hear from us again</h2>
+<div class="stats anim" style="--d:.15s"><div><em>4,057</em><span>leads went quiet (52% of all leads)</span></div>
+<div class="bad"><em>72%</em><span>of them got no follow-up from us (2,929 leads)</span></div>
+<div><em>28%</em><span>got at least one follow-up (1,128 leads)</span></div></div>
+<p class="cap anim" style="--d:.3s">A follow-up is a message from us at least 20 hours after our last one, with no answer between.</p></section><section><div class="kicker anim">Follow-ups</div><h2 class="anim" style="--d:.05s">Follow-ups work: 1 in 3 get an answer</h2>
+<p class="lead anim" style="--d:.1s">The share of our follow-ups that got an answer. Even the second one works 1 time in 5.</p>
+<div class="bars"><div class="row hl" style="--w:100.0%;--i:0"><span class="lbl">First follow-up</span><span class="track"><i></i></span><span class="val">38%<small>903 of 2,402</small></span></div><div class="row" style="--w:56.3%;--i:1"><span class="lbl">Second follow-up</span><span class="track"><i></i></span><span class="val">21%<small>261 of 1,234</small></span></div><div class="row" style="--w:50.9%;--i:2"><span class="lbl">Third follow-up</span><span class="track"><i></i></span><span class="val">19%<small>27 of 141</small></span></div><div class="row" style="--w:42.6%;--i:3"><span class="lbl">Fourth or later</span><span class="track"><i></i></span><span class="val">16%<small>4 of 25</small></span></div></div><p class="cap anim" style="--d:.25s">All 3,802 follow-ups we sent to leads, in every talk.</p></section><section><div class="kicker anim">Where we passed</div><h2 class="anim" style="--d:.05s">We passed on 2,470 leads</h2>
+<div class="split anim" style="--d:.15s"><div class="stats"><div class="brandtone"><em>1,729</em><span>we told "not a fit"</span></div>
+<div class="bad"><em>741</em><span>we never answered: they wrote last, and we did not reply</span></div></div>
+<div><p class="cap" style="margin-bottom:10px">Why we said "not a fit"</p><div class="bars"><div class="row hl" style="--w:100.0%;--i:0"><span class="lbl">Not our kind of job</span><span class="track"><i></i></span><span class="val">765</span></div><div class="row" style="--w:57.1%;--i:1"><span class="lbl">A service we do not offer</span><span class="track"><i></i></span><span class="val">437</span></div><div class="row" style="--w:27.5%;--i:2"><span class="lbl">Budget too small</span><span class="track"><i></i></span><span class="val">210</span></div><div class="row" style="--w:13.6%;--i:3"><span class="lbl">We were too busy</span><span class="track"><i></i></span><span class="val">104</span></div><div class="row" style="--w:12.4%;--i:4"><span class="lbl">Passed, no reason given</span><span class="track"><i></i></span><span class="val">95</span></div><div class="row" style="--w:15.4%;--i:5"><span class="lbl">Other reasons</span><span class="track"><i></i></span><span class="val">118</span></div></div></div></div></section><section><div class="kicker anim">When they said no</div><h2 class="anim" style="--d:.05s">Most "no" answers: our price, or another hire</h2>
+<div class="bars"><div class="row hl" style="--w:100.0%;--i:0"><span class="lbl">Our price was too high</span><span class="track"><i></i></span><span class="val">273<small>34%</small></span></div><div class="row" style="--w:90.1%;--i:1"><span class="lbl">They hired someone else</span><span class="track"><i></i></span><span class="val">246<small>31%</small></span></div><div class="row" style="--w:36.3%;--i:2"><span class="lbl">Paused or not ready</span><span class="track"><i></i></span><span class="val">99<small>12%</small></span></div><div class="row" style="--w:35.9%;--i:3"><span class="lbl">Wanted another service</span><span class="track"><i></i></span><span class="val">98<small>12%</small></span></div><div class="row" style="--w:28.2%;--i:4"><span class="lbl">Other</span><span class="track"><i></i></span><span class="val">77<small>10%</small></span></div><div class="row" style="--w:4.4%;--i:5"><span class="lbl">Will do it themselves</span><span class="track"><i></i></span><span class="val">12<small>1%</small></span></div></div><p class="cap anim" style="--d:.2s">The 805 leads who told us no, by the reason in their own words.</p></section><section><div class="kicker anim">After a call is booked</div><h2 class="anim" style="--d:.05s">Two in three booked calls end in silence</h2>
+<div class="bars"><div class="row hl" style="--w:100.0%;--i:0"><span class="lbl">They went quiet</span><span class="track"><i></i></span><span class="val">1,374<small>66%</small></span></div><div class="row" style="--w:23.8%;--i:1"><span class="lbl">Became a client</span><span class="track"><i></i></span><span class="val">327<small>16%</small></span></div><div class="row" style="--w:12.9%;--i:2"><span class="lbl">They said no</span><span class="track"><i></i></span><span class="val">177<small>8%</small></span></div><div class="row" style="--w:9.1%;--i:3"><span class="lbl">We never answered</span><span class="track"><i></i></span><span class="val">125<small>6%</small></span></div><div class="row" style="--w:3.7%;--i:4"><span class="lbl">We said &quot;not a fit&quot;</span><span class="track"><i></i></span><span class="val">51<small>2%</small></span></div><div class="row" style="--w:2.6%;--i:5"><span class="lbl">Still open or not clear</span><span class="track"><i></i></span><span class="val">36<small>2%</small></span></div></div><p class="cap anim" style="--d:.2s">The 2,090 leads who booked a call. One in six became a client.</p></section><section><div class="kicker anim">What this means</div><h2 class="anim" style="--d:.05s">Three habits</h2>
+<ol class="points"><li class="anim" style="--d:.15s"><i>1</i><div><b>Answer every reply.</b><span>We never answered 741 leads who wrote to us.</span></div></li>
+<li class="anim" style="--d:.25s"><i>2</i><div><b>Follow up at least twice when a lead goes quiet.</b><span>The first follow-up gets an answer 38% of the time, the second 21%. Today 72% of quiet leads get no follow-up.</span></div></li>
+<li class="anim" style="--d:.35s"><i>3</i><div><b>Never let a booked call end in silence.</b><span>66% of booked calls end with the lead going quiet. After each call, send a short recap and the next step.</span></div></li></ol></section></div><div class="dots" aria-label="Slides"></div><div class="hint">← → or click to move</div><div class="count"></div><script>
+const S = [...document.querySelectorAll('section')], stage = document.querySelector('.stage');
+const cnt = document.querySelector('.count'), dots = document.querySelector('.dots');
+const PAGE = matchMedia('screen and (max-width:1087px), screen and (max-height:611px)');
+let n = 0;
+S.forEach((s, i) => { const b = document.createElement('button'); b.setAttribute('aria-label', 'Slide ' + (i + 1)); b.onclick = e => { e.stopPropagation(); go(i); }; dots.appendChild(b); });
+const seen = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); seen.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
+function fit() {
+  if (PAGE.matches) { stage.style.transform = ''; return; }
+  stage.style.transform = `translate(-50%,-50%) scale(${Math.min(innerWidth / 1280, innerHeight / 720)})`;
+}
+function go(i) {
+  n = Math.max(0, Math.min(S.length - 1, i));
+  if (PAGE.matches) { if (n > 0) S[n].scrollIntoView({ block: 'start' }); return; }
+  S.forEach((s, j) => s.classList.toggle('active', j === n));
+  [...dots.children].forEach((d, j) => d.classList.toggle('on', j === n));
+  cnt.textContent = (n + 1) + ' / ' + S.length;
+  history.replaceState(null, '', '#' + (n + 1));
+}
+function layout() {
+  fit();
+  if (PAGE.matches) S.forEach(s => { if (!s.classList.contains('active')) seen.observe(s); });
+  else { seen.disconnect(); go(n); }
+}
+addEventListener('keydown', e => {   /* the arrow keys move the slides (Will, 2026-11-02) */
+  if (PAGE.matches) return;
+  if (['ArrowRight', 'PageDown', ' '].includes(e.key)) go(n + 1);
+  if (['ArrowLeft', 'PageUp'].includes(e.key)) go(n - 1);
+});
+addEventListener('click', e => { if (PAGE.matches || e.target.closest('a,button')) return; go(e.clientX > innerWidth / 3 ? n + 1 : n - 1); });
+let x0 = null;
+addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+addEventListener('touchend', e => {
+  if (x0 === null || PAGE.matches) { x0 = null; return; }
+  const dx = e.changedTouches[0].clientX - x0;
+  if (Math.abs(dx) > 40) go(dx < 0 ? n + 1 : n - 1);
+  x0 = null;
+});
+addEventListener('resize', fit);
+PAGE.addEventListener('change', layout);
+n = Math.max(0, Math.min(S.length - 1, (parseInt(location.hash.slice(1)) || 1) - 1));
+if (PAGE.matches) S.forEach(s => s.classList.remove('active'));
+layout();
+if (PAGE.matches) go(n);
+</script></body></html>
